@@ -19,6 +19,10 @@
 #ifndef PERIPH_CONF_H
 #define PERIPH_CONF_H
 
+#define CONFIG_BOARD_HAS_HSE    1
+#define CONFIG_CLOCK_HSE        8000000
+#define CONFIG_USE_CLOCK_HSE    1
+
 #include "periph_cpu.h"
 #include "clk_conf.h"
 
@@ -180,7 +184,6 @@ static const i2c_conf_t i2c_config[] = {
 };
 
 #define I2C_0_ISR           isr_i2c1_ev
-#define I2C_1_ISR           isr_i2c2_ev
 
 #define I2C_NUMOF           ARRAY_SIZE(i2c_config)
 /** @} */
@@ -196,6 +199,10 @@ static const adc_conf_t adc_config[] = {
     { GPIO_PIN(PORT_A, 7), 7 },
     { GPIO_PIN(PORT_B, 13), 19 },
     { GPIO_PIN(PORT_B, 15), 21 },
+    /* ADC Temperature channel */
+    //{ .pin = GPIO_UNDEF, .dev = 0, .chan = 16 },
+    /* ADC VREF channel */
+    //{ .pin = GPIO_UNDEF, .dev = 0, .chan = 17 },
 };
 
 #define ADC_NUMOF           ARRAY_SIZE(adc_config)
@@ -208,7 +215,7 @@ static const adc_conf_t adc_config[] = {
 static const timer_conf_t timer_config[] = {
     {
         .dev      = TIM3,
-        .max      = 0xffffffff,
+        .max      = 0x0000ffff,
 	.rcc_mask = RCC_APB1ENR_TIM3EN,
         .bus      = APB1,
         .irqn     = TIM3_IRQn

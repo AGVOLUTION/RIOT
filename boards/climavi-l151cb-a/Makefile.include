@@ -1,5 +1,10 @@
+# add the common header files to the include path
+INCLUDES += -I$(RIOTBOARD)/common/stm32/include
+
 # Setup of programmer and serial is shared between STM32 based boards
 include $(RIOTMAKE)/boards/stm32.inc.mk
+
+export BAUD = 38400
 
 # If port selection via ttys.py is enabled by `MOST_RECENT_PORT=1`, filter
 # USB serials to only select the UART bridge of embedded STLink debuggers.
