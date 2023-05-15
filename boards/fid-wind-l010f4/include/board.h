@@ -1,0 +1,2 @@
+#define GPIO_PIN_ADC_AIN3     GPIO_PIN(PORT_A, 3)
+#define GPIO_PIN_ADC_AIN4     GPIO_PIN(PORT_A, 4)
