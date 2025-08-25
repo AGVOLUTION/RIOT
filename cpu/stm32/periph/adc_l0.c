@@ -100,7 +100,10 @@ int adc_init(adc_t line)
     ADC1->CFGR2 = 0;
     /* activate VREF, and set prescaler to 4 (4Mhz clock)
      * activate also temp sensor, so that it will be ready for temp measure */
-    ADC->CCR = ADC_CCR_VREFEN | ADC_CCR_TSEN | ADC_CCR_PRESC_1;
+    ADC->CCR = ADC_CCR_VREFEN | ADC_CCR_PRESC_1;
+    #ifdef ADC_CCR_TSEN
+    ADC->CCR |= ADC_CCR_TSEN;
+    #endif
     /* Sampling time selection: 7 => 160 clocks => 40µs @ 4MHz
      * (must be 10+10 for ref start and sampling time) */
     ADC1->SMPR |= ADC_SMPR_SMP;
@@ -136,7 +139,9 @@ int32_t adc_sample(adc_t line,  adc_res_t res)
         ADC->CCR |= ADC_CCR_VREFEN;
     }
     else if (adc_config[line].chan == 18) {
+        #ifdef ADC_CCR_TSEN
         ADC->CCR |= ADC_CCR_TSEN;
+        #endif
     }
     /* else nothing */
 
@@ -160,7 +165,10 @@ int32_t adc_sample(adc_t line,  adc_res_t res)
     _disable_adc();
 
     /* Deactivate VREFINT and temperature sensor to save power */
-    ADC->CCR &= ~(ADC_CCR_VREFEN | ADC_CCR_TSEN);
+    ADC->CCR &= ~ADC_CCR_VREFEN;
+    #ifdef ADC_CCR_TSEN
+    ADC->CCR &= ~ADC_CCR_TSEN;
+    #endif
 
     /* unlock and power off device again */
     done();
