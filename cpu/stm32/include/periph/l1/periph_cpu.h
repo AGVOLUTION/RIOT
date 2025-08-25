@@ -62,7 +62,7 @@ typedef enum {
 #define EEPROM_START_ADDR          (0x08080000)
 #if defined(CPU_MODEL_STM32L152RE)
 #define EEPROM_SIZE                (16384UL)  /* 16kB */
-#elif defined(CPU_MODEL_STM32L151RC)
+#elif defined(CPU_MODEL_STM32L151RC) || defined(CPU_MODEL_STM32L151CC)
 #define EEPROM_SIZE                (8192U)    /* 8kB */
 #elif defined(CPU_MODEL_STM32L151CB) || defined(CPU_MODEL_STM32L151CB_A) || defined(CPU_MODEL_STM32L151C6_A)
 #define EEPROM_SIZE                (4096U)    /* 4kB */
