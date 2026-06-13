@@ -1,0 +1,25 @@
+/**
+ * @defgroup pkg_nanomodbus nanoMODBUS Modbus RTU/TCP library
+ * @ingroup  pkg
+ * @ingroup  sys
+ * @brief    Compact, dependency-free Modbus RTU/TCP client/server library
+ *
+ * # nanoMODBUS
+ *
+ * nanoMODBUS is a small, header-and-single-source Modbus implementation with
+ * no dynamic allocation. The transport is provided by the application through
+ * `read`/`write` callbacks, which maps cleanly onto RIOT's `periph_uart`.
+ *
+ * On this project it is used to implement the Modbus RTU *server* (slave) over
+ * RS485 as an alternative field-bus to SDI-12.
+ *
+ * ## Usage
+ *
+ * ```makefile
+ * USEPKG += nanomodbus
+ * # server-only build, drop the strerror table:
+ * CFLAGS += -DNMBS_CLIENT_DISABLED -DNMBS_STRERROR_DISABLED
+ * ```
+ *
+ * @see      https://github.com/debevv/nanoMODBUS
+ */
